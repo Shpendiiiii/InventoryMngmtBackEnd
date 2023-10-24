@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>WebApplication1</RootNamespace>
+  <UseIISExpress>true</UseIISExpress>
+
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,5 +14,8 @@
     <PackageReference Include="MongoDB.Driver" Version="2.22.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
+	
+
+
 
 </Project>
