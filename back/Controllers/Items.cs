@@ -88,10 +88,27 @@ public class Items : Controller
         {
             return StatusCode(500, $"Internal server error: {ex.Message}");
         }
+        
+    }
     
-        
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateItem(string id, [FromBody] Item itemUpdate)
+    {
+        var filter = Builders<Item>.Filter.Eq(e => e._id, itemUpdate._id);
 
-        
+        try
+        {
+            var updateResult = await itemsCollection.ReplaceOneAsync(filter, itemUpdate);
+
+            if (updateResult.IsAcknowledged && updateResult.ModifiedCount > 0)
+                return Ok(itemUpdate);
+            else
+                return NotFound(new { Message = "Item not found" });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
     }
 
 }
