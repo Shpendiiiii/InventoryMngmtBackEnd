@@ -74,4 +74,24 @@ public class Items : Controller
             return NotFound("No items were deleted.");
         }
     }
+
+    [HttpGet("id")]
+    public async Task<IActionResult> GetIem([FromQuery] int id)
+    { 
+        var filter = Builders<Item>.Filter.Eq("_id", id);
+
+        try {
+            var result = await itemsCollection.Find(filter).FirstOrDefaultAsync();
+            return Ok(result);
+        }
+        catch(Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
+    
+        
+
+        
+    }
+
 }
